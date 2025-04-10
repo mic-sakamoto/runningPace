@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>ランニングペース計算ツール</title>
+        <link rel="stylesheet" href="runningPace.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="runningPace.js"></script>
+    </head>
+    <body id="body">
+        <h1>ランニングペース計算ツール</h1>
+        <input type="text" id="time" placeholder="タイム※hh:mm:ss or mm:ss">
+        <button onclick="setTime('2:27:00')">サブ福岡国際A</button>
+        <button onclick="setTime('2:30:00')">サブ2.5</button>
+        <button onclick="setTime('2:35:00')">サブ福岡国際B</button>
+        <button onclick="setTime('2:50:00')">サブエガ</button>
+        <button onclick="setTime('3:00:00')">サブ3</button><br>
+
+        <input type="number" id="distance" placeholder="距離(km)">
+        <button onclick="setDistance(5)">5km</button>
+        <button onclick="setDistance(10)">10km</button>
+        <button onclick="setDistance(21.0975)">ハーフマラソン</button>
+        <button onclick="setDistance(42.195)">マラソン</button>
+
+        <h3>気象条件による補正</h3>
+        <label>気温（℃）：<input type="number" id="temp" placeholder="例：25"></label><br>
+        <label>湿度（％）：<input type="number" id="humidity" placeholder="例：60"></label><br>
+
+        <button type="submit" onclick="buttonClick()" id="calc">計算</button>
+
+        <div id="adjustedPace"></div>
+        <div id="alert"></div>
+        <div id="perPace"></div>
+        <div id="jogPace"></div>
+        <div id="tempoPace"></div>
+        <div id="longIntervalPace"></div>
+        <div id="middleIntervalPace"></div>
+        <div id="shortIntervalPace"></div>
+
+        <h2>履歴</h2>
+        <div id="history"></div>
+
+        <canvas id="paceChart" width="400" height="200"></canvas><br>
+
+        <h2>自己ベスト</h2>
+        <label>1500m：<input type="text" id="pb1500m" placeholder="mm:ss"></label>
+        <button onclick="savePB('1500m')">保存</button>
+        <label>5km：<input type="text" id="pb5k" placeholder="mm:ss"></label>
+        <button onclick="savePB('5km')">保存</button><br>
+        <label>10km：<input type="text" id="pb10k" placeholder="mm:ss"></label>
+        <button onclick="savePB('10km')">保存</button>
+        <label>ハーフ：<input type="text" id="pbHalf" placeholder="hh:mm:ss"></label>
+        <button onclick="savePB('half')">保存</button>
+        <label>フル:<input type="text" id="pbFull" placeholder="hh:mm:ss"></label>
+        <button onclick="savePB('full')">保存</button><br>
+
+        <canvas id="pbChart" width="400" height="200"></canvas><br>
+
+        <button onclick="toggleDarkMode()">ダークモード切替</button>
+    </body>
+</html>
