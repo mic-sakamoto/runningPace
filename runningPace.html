@@ -37,6 +37,13 @@
         <div id="middleIntervalPace"></div>
         <div id="shortIntervalPace"></div>
 
+        <h2>自己ベスト予測</h2>
+        <label>基準距離（㎞）：<input type="number" id="baseDistance" placeholder="例：5"></label>
+        <label>タイム：<input type="text" id="baseTime" placeholder="例：16：00"></label>
+        <label>予測距離（㎞）：<input type="number" id="targetDistance" placeholder="10"></label><br>
+        <button id="predict" onclick="predictPB()">予測する</button>
+        <div id="pbPredictionResult"></div>
+
         <h2>履歴</h2>
         <div id="history"></div>
 

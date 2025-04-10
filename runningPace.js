@@ -32,14 +32,16 @@ function checkTimeAndDistance(){
 }
 
 function calcTime(){
-    var timeValueArray=document.getElementById("time").value.trim().split(":");
+    var timeValueArray=document.getElementById("time").value.trim();
     var distance=parseFloat(document.getElementById("distance").value.trim());
 
-    if(timeValueArray.length==3){
-        var totalSeconds=parseInt(timeValueArray[0])*3600+parseInt(timeValueArray[1])*60+parseInt(timeValueArray[2]);
-    }else if(timeValueArray.length==2){
-        totalSeconds=parseInt(timeValueArray[0])*60+parseInt(timeValueArray[1]);
-    }
+    var totalSeconds=getSecondsFromTime(timeValueArray);
+
+    // if(timeValueArray.length==3){
+    //     var totalSeconds=parseInt(timeValueArray[0])*3600+parseInt(timeValueArray[1])*60+parseInt(timeValueArray[2]);
+    // }else if(timeValueArray.length==2){
+    //     totalSeconds=parseInt(timeValueArray[0])*60+parseInt(timeValueArray[1]);
+    // }
 
     var pace=totalSeconds/distance;
 
@@ -76,6 +78,27 @@ function calcPace(perPace){
     var minutes=Math.floor(perPace/60);
     var seconds=Math.floor(perPace%60);
     return minutes+"分"+seconds+"秒";
+}
+
+function predictPB(){
+    const baseDist=parseFloat(document.getElementById("baseDistance").value);
+    const targetDist=parseFloat(document.getElementById("targetDistance").value);
+    const baseTimeStr=document.getElementById("baseTime").value.trim();
+
+    const baseSec=getSecondsFromTime(baseTimeStr);
+    if(isNaN(baseDist)||isNaN(targetDist)||baseSec===null){
+        document.getElementById("pbPredictionResult").innerText="入力を確認してください";
+        return;
+    }
+
+    const predictedSec=baseSec*Math.pow(targetDist/baseDist,1.06);
+    const min=Math.floor(predictedSec/60);
+    const sec=Math.round(predictedSec%60).toString().padStart(2,'0');
+    const hr=Math.floor(min/60);
+    const minAdjusted=min%60;
+
+    const timeStr=hr>0 ? `${hr}:${minAdjusted.toString().padStart(2,'0')}:${sec}` : `${min}:${sec}`;
+    document.getElementById("pbPredictionResult").innerText=`予測タイム：${timeStr}`;
 }
 
 function saveHistory(time,distance,paces){
