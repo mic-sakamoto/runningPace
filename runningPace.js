@@ -91,7 +91,7 @@ function predictPB(){
         return;
     }
 
-    const predictedSec=baseSec*Math.pow(targetDist/baseDist,1.06);
+    const predictedSec=baseSec*Math.pow(targetDist/baseDist,1.07);
     const min=Math.floor(predictedSec/60);
     const sec=Math.round(predictedSec%60).toString().padStart(2,'0');
     const hr=Math.floor(min/60);
